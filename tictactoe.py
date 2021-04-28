@@ -20,10 +20,17 @@ def print_horizontal_line():
     print("   +---+---+---+")
 
 def print_board():
-    print("     A   B   C  ")
+    print("\n\n     A   B   C  ")
     print_horizontal_line()
     for i in range(3):
         print(" " + str(i + 1) +" |   |   |   |")
         print_horizontal_line()
+    print(" ")
 
 print_board()
+for i in range(9):
+    if (i % 2) == 0:
+        input("  Player_1 > ")
+    else:
+        input("  Player_2 > ")
+    print_board()
