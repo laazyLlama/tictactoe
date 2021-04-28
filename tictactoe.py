@@ -16,6 +16,17 @@
 # 3 |   |   |   |
 #   +---+---+---+
 
+def print_start():
+    print("****************************************") #40 spaces
+    print("*                                      *")
+    print("*               Welcome:               *")
+    print("*                  to                  *")
+    print("*             Tic-Tac-Toe              *")
+    print("*                                      *")
+    print("*          PV<P>        PV<E>          *")
+    print("*                                      *")
+    print("****************************************")
+
 def print_horizontal_line():
     print("   +---+---+---+")
 
@@ -27,6 +38,7 @@ def print_board():
         print_horizontal_line()
     print(" ")
 
+print_start()
 print_board()
 for i in range(9):
     if (i % 2) == 0:
