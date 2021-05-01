@@ -7,15 +7,17 @@
 #Last Changes:     28/04/2021
 #------------------------------------------------------------------------------
 
-#     A   B   C
-#   +---+---+---+
-# 1 |   |   |   |
-#   +---+---+---+
-# 2 |   |   |   |
-#   +---+---+---+
-# 3 |   |   |   |
-#   +---+---+---+
+import random
 
+# +---+---+---+
+# | 1 | 2 | 3 |
+# +---+---+---+
+# | 4 | 5 | 6 |
+# +---+---+---+
+# | 7 | 8 | 9 |
+# +---+---+---+
+
+"""
 def print_start():
     print("****************************************") #40 spaces
     print("*                                      *")
@@ -25,24 +27,42 @@ def print_start():
     print("*                                      *")
     print("*          PV<P>        PV<E>          *")
     print("*                                      *")
+    print("*                                      *")
     print("****************************************")
 
-def print_horizontal_line():
-    print("   +---+---+---+")
+def get_cell(coordinate):
+    if int(coordinate[0]) <= 3:
+        print("true")
 
-def print_board():
-    print("\n\n     A   B   C  ")
-    print_horizontal_line()
-    for i in range(3):
-        print(" " + str(i + 1) +" |   |   |   |")
-        print_horizontal_line()
-    print(" ")
 
 print_start()
 print_board()
 for i in range(9):
     if (i % 2) == 0:
-        input("  Player_1 > ")
+        choise = input("  Player_1 > ")
     else:
-        input("  Player_2 > ")
+        choise = input("  Player_2 > ")
+    print(choise)
+    get_cell(choise)
     print_board()
+"""
+
+class Game:
+    def __init__(self):
+        self.board = [str(i + 1) for i in range(9)]
+        self.winner = None
+
+    def print_board(self):
+        print("+---+---+---+")
+        for line in [self.board[i * 3:(i + 1) * 3] for i in range(3)]:
+            print("| " + " | ".join(line) + " |")
+            print("+---+---+---+")
+
+
+class Player:
+    def __init__(self, symbol):
+        self.symbol = symbol
+
+
+game = Game()
+game.print_board()
