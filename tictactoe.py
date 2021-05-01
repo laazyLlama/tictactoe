@@ -29,22 +29,6 @@ def print_start():
     print("*                                      *")
     print("*                                      *")
     print("****************************************")
-
-def get_cell(coordinate):
-    if int(coordinate[0]) <= 3:
-        print("true")
-
-
-print_start()
-print_board()
-for i in range(9):
-    if (i % 2) == 0:
-        choise = input("  Player_1 > ")
-    else:
-        choise = input("  Player_2 > ")
-    print(choise)
-    get_cell(choise)
-    print_board()
 """
 
 class Game:
@@ -53,16 +37,16 @@ class Game:
         self.winner = None
 
     def print_board(self):
-        print("+---+---+---+")
+        print("   +---+---+---+")
         for line in [self.board[i * 3:(i + 1) * 3] for i in range(3)]:
-            print("| " + " | ".join(line) + " |")
-            print("+---+---+---+")
+            print("   | " + " | ".join(line) + " |")
+            print("   +---+---+---+")
 
     def get_avilable_moves(self):
         valid_moves = []
         for cell in self.board:
             if (cell != 'X') and (cell != 'O'):
-                valid_moves.append(cell)
+                valid_moves.append(self.board.index(cell))
         return valid_moves
 
     def make_move(self, cell_index, symbol):
@@ -73,8 +57,24 @@ class Player:
     def __init__(self, symbol):
         self.symbol = symbol
 
+    def get_valid_move(self, game):
+        cell = None
+        valid_move = False
+        while not valid_move:
+            move = input(f" Player '{self.symbol}' >  ")
+            try:
+                cell = int(move) - 1
+                if cell not in game.get_avilable_moves():
+                    raise ValueError
+                valid_move = True
+            except ValueError:
+                print(f"'{move}' is not a valid move!")
+        return cell
+
 
 game = Game()
+player1 = Player('X')
 game.make_move(1, 'X')
 game.print_board()
 print(game.get_avilable_moves())
+player1.get_valid_move(game)
