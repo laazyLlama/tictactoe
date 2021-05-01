@@ -4,7 +4,7 @@
 #------------------------------------------------------------------------------
 #Author:           laazyLlama
 #Date Created:     28/04/2021
-#Last Changes:     28/04/2021
+#Last Changes:     01/05/2021
 #------------------------------------------------------------------------------
 
 import random
@@ -58,6 +58,16 @@ class Game:
             print("| " + " | ".join(line) + " |")
             print("+---+---+---+")
 
+    def get_avilable_moves(self):
+        valid_moves = []
+        for cell in self.board:
+            if (cell != 'X') and (cell != 'O'):
+                valid_moves.append(cell)
+        return valid_moves
+
+    def make_move(self, cell_index, symbol):
+        self.board[cell_index] = symbol
+
 
 class Player:
     def __init__(self, symbol):
@@ -65,4 +75,6 @@ class Player:
 
 
 game = Game()
+game.make_move(1, 'X')
 game.print_board()
+print(game.get_avilable_moves())
