@@ -49,8 +49,8 @@ class Game:
                 valid_moves.append(self.board.index(cell))
         return valid_moves
 
-    def make_move(self, cell_index, symbol):
-        self.board[cell_index] = symbol
+    def make_move(self, cell_index, player):
+        self.board[cell_index] = player.symbol
 
 
 class Player:
@@ -74,7 +74,14 @@ class Player:
 
 game = Game()
 player1 = Player('X')
-game.make_move(1, 'X')
+player2 = Player('O')
+current_player = player1
+
 game.print_board()
-print(game.get_avilable_moves())
-player1.get_valid_move(game)
+while game.winner == None:
+    game.make_move(current_player.get_valid_move(game), current_player)
+    game.print_board()
+    if current_player == player1:
+        current_player = player2
+    else:
+        current_player = player1
