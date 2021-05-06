@@ -4,7 +4,7 @@
 #------------------------------------------------------------------------------
 #Author:           laazyLlama
 #Date Created:     28/04/2021
-#Last Changes:     01/05/2021
+#Last Changes:     06/05/2021
 #------------------------------------------------------------------------------
 
 import random
@@ -44,6 +44,7 @@ class Game:
             if cell_index % 3 == 0:
                 print(color.WHITE + "\n   +---+---+---+")
                 print("   |", end = "")
+
             if cell == 'X':
                 print(f" {self.color_x}" + cell + f"{color.WHITE} |", end = "")
             elif cell == 'O':
@@ -91,6 +92,7 @@ class Player:
     def get_valid_move(self, game):
         cell = None
         valid_move = False
+
         while not valid_move:
             if self.symbol == 'X':
                 move = input(color.GREEN + f" Player '{self.symbol}' >  " + color.DEFAULT)
@@ -110,24 +112,6 @@ game = Game(color.GREEN, color.BRIGHTRED)
 player1 = Player('X', game.color_x)
 player2 = Player('O', game.color_o)
 current_player = player1
-
-print(color.DEFAULT + "DEFAULT" + color.DEFAULT)
-print(color.BLACK + "BLACK" + color.DEFAULT)
-print(color.RED + "RED" + color.DEFAULT)
-print(color.GREEN + "GREEN" + color.DEFAULT)
-print(color.YELLOW + "YELLOW" + color.DEFAULT)
-print(color.BLUE + "BLUE" + color.DEFAULT)
-print(color.MAGENTA + "MAGENTA" + color.DEFAULT)
-print(color.CYAN + "CYAN" + color.DEFAULT)
-print(color.WHITE + "WHITE" + color.DEFAULT)
-print(color.BRIGHTBLACK + "BRIGHTBLACK" + color.DEFAULT)
-print(color.BRIGHTRED + "BRIGHTRED" + color.DEFAULT)
-print(color.BRIGHTGREEN + "BRIGHTGREEN" + color.DEFAULT)
-print(color.BRIGHTYELLOW + "BRIGHTYELLOW" + color.DEFAULT)
-print(color.BRIGHTBLUE + "BRIGHTBLUE" + color.DEFAULT)
-print(color.BRIGHTMAGENTA + "BRIGHTMAGENTA" + color.DEFAULT)
-print(color.BRIGHTCYAN + "BRIGHTCYAN" + color.DEFAULT)
-print(color.BRIGHTWHITE + "BRIGHTWHITE" + color.DEFAULT)
 
 game.print_board()
 while game.get_avilable_moves():
