@@ -95,20 +95,20 @@ class Human(Player):
         valid_move = False
 
         while not valid_move:
-            move = input(f"{self.color} Player '{self.symbol}' >  " + c.DEFAULT)
+            move = input(f"{self.color} Player '{self.symbol}' >  ")
             try:
                 cell = int(move) - 1
                 if cell not in game.get_avilable_moves():
                     raise ValueError
                 valid_move = True
             except ValueError:
-                print(c.BRIGHTYELLOW + f"'{move}' is not a valid move!" + c.DEFAULT)
+                print(c.BRIGHTYELLOW + f"'{move}' is not a valid move!")
         return cell
 
 class RandomComputer(Player):
     def get_valid_move(self, game):
         cell = random.choice(game.get_avilable_moves())
-        print(f"{self.color} Player '{self.symbol}' >  " + c.DEFAULT + str(cell + 1))
+        print(f"{self.color} Player '{self.symbol}' >  " + str(cell + 1))
         return cell
 
 game = Game(c.GREEN, c.BRIGHTRED)
