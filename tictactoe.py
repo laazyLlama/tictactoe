@@ -8,7 +8,7 @@
 #------------------------------------------------------------------------------
 
 import random
-import colors as color
+import colors as c
 
 # +---+---+---+
 # | 1 | 2 | 3 |
@@ -42,16 +42,16 @@ class Game:
     def print_board(self):
         for cell_index, cell in enumerate(self.board):
             if cell_index % 3 == 0:
-                print(color.WHITE + "\n   +---+---+---+")
+                print(c.WHITE + "\n   +---+---+---+")
                 print("   |", end = "")
 
             if cell == 'X':
-                print(f" {self.color_x}" + cell + f"{color.WHITE} |", end = "")
+                print(f" {self.color_x}" + cell + f"{c.WHITE} |", end = "")
             elif cell == 'O':
-                print(f" {self.color_o}" + cell + f"{color.WHITE} |", end = "")
+                print(f" {self.color_o}" + cell + f"{c.WHITE} |", end = "")
             else:
-                print(f" {color.BRIGHTBLACK}" + cell + f"{color.WHITE} |", end = "")
-        print(color.WHITE + "\n   +---+---+---+")
+                print(f" {c.BRIGHTBLACK}" + cell + f"{c.WHITE} |", end = "")
+        print(c.WHITE + "\n   +---+---+---+")
 
     def get_avilable_moves(self):
         valid_moves = []
@@ -89,28 +89,31 @@ class Player:
         self.symbol = symbol
         self.color = color
 
+class Human(Player):
     def get_valid_move(self, game):
         cell = None
         valid_move = False
 
         while not valid_move:
-            if self.symbol == 'X':
-                move = input(color.GREEN + f" Player '{self.symbol}' >  " + color.DEFAULT)
-            else:
-                move = input(color.BRIGHTRED + f" Player '{self.symbol}' >  " + color.DEFAULT)
+            move = input(f"{self.color} Player '{self.symbol}' >  " + c.DEFAULT)
             try:
                 cell = int(move) - 1
                 if cell not in game.get_avilable_moves():
                     raise ValueError
                 valid_move = True
             except ValueError:
-                print(color.BRIGHTYELLOW + f"'{move}' is not a valid move!" + color.DEFAULT)
+                print(c.BRIGHTYELLOW + f"'{move}' is not a valid move!" + c.DEFAULT)
         return cell
 
+class RandomComputer(Player):
+    def get_valid_move(self, game):
+        cell = random.choice(game.get_avilable_moves())
+        print(f"{self.color} Player '{self.symbol}' >  " + c.DEFAULT + str(cell + 1))
+        return cell
 
-game = Game(color.GREEN, color.BRIGHTRED)
-player1 = Player('X', game.color_x)
-player2 = Player('O', game.color_o)
+game = Game(c.GREEN, c.BRIGHTRED)
+player1 = Human('X', game.color_x)
+player2 = RandomComputer('O', game.color_o)
 current_player = player1
 
 game.print_board()
@@ -118,11 +121,11 @@ while game.get_avilable_moves():
     game.make_move(current_player.get_valid_move(game), current_player)
     game.print_board()
     if game.winner:
-        print(current_player.color + f" Player '{current_player.symbol}' has won!" + color.DEFAULT)
+        print(current_player.color + f" Player '{current_player.symbol}' has won!" + c.DEFAULT)
         break
     if current_player == player1:
         current_player = player2
     else:
         current_player = player1
 if game.winner == None:
-    print(color.BRIGHTMAGENTA + " It's a tie, nobody has won!" + color.DEFAULT)
+    print(c.BRIGHTMAGENTA + " It's a tie, nobody has won!" + c.DEFAULT)
